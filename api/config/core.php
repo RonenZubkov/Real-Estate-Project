@@ -9,7 +9,7 @@ session_start();
 date_default_timezone_set('Asia/Jerusalem');
 
 // home page url
-$home_url="http://localhost:63342/htdocs/realEstate/";
+$home_url="http://localhost:63342/htdocs/";
 
 // page given in URL parameter, default page is one
 $page = isset($_GET['page']) ? $_GET['page'] : 1;

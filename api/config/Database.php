@@ -5,9 +5,9 @@ class Database{
 
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "real estate";
-    private $username = "AreZi";
-    private $password = "H7c2q5uVZsoP1Wda";
+    private $db_name = "real_estate";
+    private $username = "root";
+    private $password = "";
     public $conn;
 
     // get the database connection

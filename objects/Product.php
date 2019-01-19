@@ -4,7 +4,7 @@ class Product{
 
     // database connection and table name
     private $conn;
-    private $table_name = "products";
+    private $table_name = "property";
 
     // object properties
     public $id;

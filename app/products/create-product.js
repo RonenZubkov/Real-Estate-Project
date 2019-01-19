@@ -3,7 +3,7 @@ $(document).ready(function(){
     // show html form when 'create product' button was clicked
     $(document).on('click', '.create-product-button', function(){
         // load list of categories
-        $.getJSON("http://localhost/api/category/read.php", function(data){
+        $.getJSON("http://localhost:63342/htdocs/api/category/read.php", function(data){
             // build categories option html
             // loop through returned list of data
             let categories_options_html="";
@@ -78,7 +78,7 @@ $(document).ready(function(){
 
         // submit form data to api
         $.ajax({
-            url: "http://localhost/api/product/create.php",
+            url: "http://localhost:63342/htdocs/api/product/create.php",
             type : "POST",
             contentType : 'application/json',
             data : form_data,

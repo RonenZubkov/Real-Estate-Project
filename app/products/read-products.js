@@ -12,10 +12,11 @@ $(document).ready(function(){
 
 // function to show list of products
 function showProducts(){
-
+    console.log( $.getJSON("http://localhost:63342/htdocs/api/product/read.php", function(data){}));
     // get list of products from the API
-    $.getJSON("http://localhost/api/product/read.php", function(data){
+    $.getJSON("http://localhost:63342/htdocs/api/product/read.php", function(data){
         // html for listing products
+        console.log('Show products(), Trying to fetch data');
         let read_products_html="";
 
     // when clicked, it will load the create product form

@@ -17,7 +17,7 @@
     <title><?php echo isset($page_title) ? strip_tags($page_title) : "Store Front"; ?></title>
     <?php
     // core configuration
-    include_once "config/core.php";
+    include_once "api/config/core.php";
 
     // set page title
     $page_title="Edit Profile";
