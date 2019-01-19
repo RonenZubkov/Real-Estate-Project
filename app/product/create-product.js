@@ -17,8 +17,8 @@ $(document).ready(function(){
             // we used the 'required' html5 property to prevent empty fields
             let create_product_html="";
 
-            // 'read products' button to show list of products
-            create_product_html+="<div id='read-products' class='btn btn-primary pull-right m-b-15px read-products-button'>";
+            // 'read product' button to show list of product
+            create_product_html+="<div id='read-product' class='btn btn-primary pull-right m-b-15px read-product-button'>";
             create_product_html+="<span class='glyphicon glyphicon-list'></span> Read Products";
             create_product_html+="</div>";
 
@@ -83,7 +83,7 @@ $(document).ready(function(){
             contentType : 'application/json',
             data : form_data,
             success : function(result) {
-                // product was created, go back to products list
+                // product was created, go back to product list
                 showProducts();
             },
             error: function(xhr, resp, text) {

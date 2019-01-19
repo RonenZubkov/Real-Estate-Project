@@ -33,7 +33,7 @@ $num = $stmt->rowCount();
 // to identify page for paging
 $page_url="read_users.php?";
 
-// include products table HTML template
+// include product table HTML template
 include_once "read_users_template.php";
 
 echo "</div>";

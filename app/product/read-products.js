@@ -3,20 +3,19 @@ $(document).ready(function(){
     // show list of product on first load
     showProducts();
 
-    // when a 'read products' button was clicked
-    $(document).on('click', '.read-products-button', function(){
+    // when a 'read product' button was clicked
+    $(document).on('click', '.read-product-button', function(){
         showProducts();
     });
 
 });
 
-// function to show list of products
+// function to show list of product
 function showProducts(){
-    console.log( $.getJSON("http://localhost:63342/htdocs/api/product/read.php", function(data){}));
-    // get list of products from the API
+    // get list of product from the API
     $.getJSON("http://localhost:63342/htdocs/api/product/read.php", function(data){
-        // html for listing products
-        console.log('Show products(), Trying to fetch data');
+        // html for listing product
+        console.log('Show product(), Trying to fetch data');
         let read_products_html="";
 
     // when clicked, it will load the create product form
