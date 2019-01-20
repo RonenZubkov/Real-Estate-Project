@@ -81,8 +81,8 @@ include 'layout_foot.php';
 <script src="app/product/read-products.js"></script>
 <script src="app/product/create-product.js"></script>
 <script src="app/product/read-one-product.js"></script>
-<!--<script src="app/product/update-product.js"></script>-->
-<!--<script src="app/product/delete-product.js"></script>-->
+<script src="app/product/update-product.js"></script>
+<script src="app/product/delete-product.js"></script>
 
 </body>
 </html>
