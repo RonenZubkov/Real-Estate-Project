@@ -33,7 +33,6 @@
 
     echo "<div class='col-md-12'>";
 
-    // code when form was submitted will be here
     // if form was posted
     if($_POST){
 

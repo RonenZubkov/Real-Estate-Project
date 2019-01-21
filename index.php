@@ -12,7 +12,7 @@
     <script src="app/assets/js/jquery.min.js"></script>
     <script src="app/assets/js/bootstrap.min.js"></script>
 
-    <script src="js/main.js"></script>
+<!--    <script src="js/main.js"></script>-->
 
     <!-- set the page title, for seo purposes too -->
     <title><?php echo isset($page_title) ? strip_tags($page_title) : "Roman Hacking Project"; ?></title>
@@ -55,16 +55,14 @@ else if($action=='already_logged_in'){
 
 // content once logged in
 echo "<div class='alert alert-info'>";
-    echo "Content when logged in will be here. For example, your premium product or services.";
+//  our app will be injected here
+//    echo "<div id='app'></div>";
 echo "</div>";
 
 
+echo "</div>"; ?>
 
-echo "</div>";
-?>
-
-<!-- our app will be injected here -->
-<div id="app"></div>
+<div id='app'></div>
 
 <?php
 // footer HTML and JavaScript codes

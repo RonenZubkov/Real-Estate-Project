@@ -10,7 +10,7 @@ $(document).ready(function(){
             // start html
             let read_one_product_html="";
 
-        // when clicked, it will show the product's list
+            // when clicked, it will show the product's list
             read_one_product_html+="<div id='read-product' class='btn btn-primary pull-right m-b-15px read-product-button'>";
             read_one_product_html+="<span class='glyphicon glyphicon-list'></span> Read Products";
             read_one_product_html+="</div>";

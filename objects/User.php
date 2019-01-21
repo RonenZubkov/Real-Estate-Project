@@ -133,6 +133,47 @@ class User{
 
     }
 
+    function Update(){
+        // update query
+        $query = "UPDATE
+                " . $this->table_name . "
+            SET
+                first_name = :firstname,
+                last_name = :lastname,
+                email = :email,
+                contact_number = :contact_number,
+                address = :address,
+                password = :password 
+            WHERE
+                id = :id";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // sanitize
+        $this->firstname=htmlspecialchars(strip_tags($this->firstname));
+        $this->lastname=htmlspecialchars(strip_tags($this->lastname));
+        $this->email=htmlspecialchars(strip_tags($this->email));
+        $this->contact_number=htmlspecialchars(strip_tags($this->contact_number));
+        $this->address=htmlspecialchars(strip_tags($this->address));
+        $this->password=htmlspecialchars(strip_tags($this->password));
+
+        // bind new values
+        $stmt->bindParam(':first_name', $this->firstname);
+        $stmt->bindParam(':last_name', $this->lastname);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':contact_number', $this->contact_number);
+        $stmt->bindParam(':address', $this->address);
+        $stmt->bindParam(':password', $this->password);
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
+
     // read all user records
     function readAll($from_record_num, $records_per_page){
 

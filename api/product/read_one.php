@@ -23,7 +23,7 @@ $product->id = isset($_GET['id']) ? $_GET['id'] : die();
 // read the details of product to be edited
 $product->readOne();
 
-if($product->name!=null){
+if($product->name!= null){
     // create array
     $product_arr = array(
         "id" =>  $product->id,
@@ -32,7 +32,6 @@ if($product->name!=null){
         "price" => $product->price,
         "category_id" => $product->category_id,
         "category_name" => $product->category_name
-
     );
 
     // set response code - 200 OK

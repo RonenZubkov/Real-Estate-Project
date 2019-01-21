@@ -26,7 +26,7 @@ $(document).ready(function(){
                 $.each(data.records, function(key, val){
 
                     // pre-select option is category id is the same
-                    if(val.id==category_id){
+                    if(val.id === category_id){
                         categories_options_html+="<option value='" + val.id + "' selected>" + val.name + "</option>";
                     }
 
@@ -45,7 +45,7 @@ $(document).ready(function(){
                 update_product_html+="</div>";
 
                 // build 'update product' html form
-// we used the 'required' html5 property to prevent empty fields
+                // we used the 'required' html5 property to prevent empty fields
                 update_product_html+="<form id='update-product-form' action='#' method='post' border='0'>";
                 update_product_html+="<table class='table table-hover table-responsive table-bordered'>";
 
