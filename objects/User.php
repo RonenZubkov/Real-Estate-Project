@@ -132,7 +132,7 @@ class User{
         }
 
     }
-
+//     id = :id"
     function Update(){
         // update query
         $query = "UPDATE
@@ -145,8 +145,8 @@ class User{
                 address = :address,
                 password = :password 
             WHERE
-                id = :id";
-
+                id = $this->id";
+      
         // prepare query statement
         $stmt = $this->conn->prepare($query);
 
@@ -222,6 +222,30 @@ class User{
         // return row count
         return $num;
     }
+
+//    function read(){
+//
+//        // select all query
+//        $query = "SELECT `id`,
+//                `first_name`,
+//                `last_name`,
+//                email,
+//                contact_number,
+//                access_level
+//            FROM
+//                " . $this->table_name . "WHERE
+//                id = $this->user_id
+//            LIMIT
+//                0,1";
+//
+//        // prepare query statement
+//        $stmt = $this->conn->prepare($query);
+//
+//        // execute query
+//        $stmt->execute();
+//
+//        return $stmt;
+//    }
 
 
     public function showError($stmt){

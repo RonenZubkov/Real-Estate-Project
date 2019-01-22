@@ -63,12 +63,11 @@ if($_POST){
     $user->id = $_SESSION['user_id'];
 
 // set user property values
-    $user->firstname = $data->first_name;
-    $user->lastname = $data->last_name;
-    $user->password = $data->password;
-    $user->email = $data->email;
-    $user->address = $data->address;
-    $user->contact_number = $data->contact_number;
+    $user->firstname=$_POST['firstname'];
+    $user->lastname=$_POST['lastname'];
+    $user->contact_number=$_POST['contact_number'];
+    $user->address=$_POST['address'];
+    $user->password=$_POST['password'];
 
 // get id of product to be edited
     /* Consult if to get it from Session or anything else $_SESSION['id']*/
@@ -101,7 +100,7 @@ if($_POST){
 }
 ?>
 
-<form action='register.php' method='post' id='register'>
+<form action='edit_profile.php' method='post' id='register'>
 
     <table class='table table-responsive'>
 
