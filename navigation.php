@@ -35,7 +35,7 @@
                             &nbsp;&nbsp;<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo $home_url; ?>edit_profile.php">Edit Profile</li>
+                            <li><a href="<?php echo $home_url; ?>/app/edit_profile.php">Edit Profile</li>
                             <li><a href="<?php echo $home_url; ?>logout.php">Logout</a></li>
                         </ul>
                     </li>

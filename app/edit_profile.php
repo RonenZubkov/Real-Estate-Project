@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <title>Real Estate</title>
 
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
 
-    <link rel="stylesheet" href="app/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="app/assets/css/custom.css">
-
-    <script src="app/assets/js/jquery.min.js"></script>
-    <script src="app/assets/js/bootstrap.min.js"></script>
-
-<!--    <script src="js/main.js"></script>-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 
     <!-- set the page title, for seo purposes too -->
     <title><?php echo isset($page_title) ? strip_tags($page_title) : "Store Front"; ?></title>
     <?php
     // core configuration
-    include_once "api/config/core.php";
+    include_once "../api/config/core.php";
 
     // set page title
     $page_title="Edit Profile";
@@ -33,14 +30,14 @@
     include_once "./libs/php/utils.php";
 
     // include database and object files
-    include_once 'api/config/database.php';
+    include_once '../api/config/Database.php';
     include_once 'objects/User.php';
     ?>
 
 </head>
 <?php
 // include page header HTML
-include_once 'layout_head.php';
+include_once '../layout_head.php';
 
 echo "<div class='col-md-12'>";
 
@@ -58,16 +55,16 @@ $user = new User($db);
 if($_POST){
     // get id of product to be edited
     $data = json_decode(file_get_contents("php://input"));
-
+    print $data;
 // set ID property of product to be edited
     $user->id = $_SESSION['user_id'];
 
 // set user property values
-    $user->firstname=$_POST['firstname'];
-    $user->lastname=$_POST['lastname'];
-    $user->contact_number=$_POST['contact_number'];
-    $user->address=$_POST['address'];
-    $user->password=$_POST['password'];
+    $user->firstname=$data->firs_name;
+    $user->lastname=$data->lastname;
+    $user->contact_number=$data->contact_number;
+    $user->address=$data->address;
+    $user->password=$data->password;
 
 // get id of product to be edited
     /* Consult if to get it from Session or anything else $_SESSION['id']*/

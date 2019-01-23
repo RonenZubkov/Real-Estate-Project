@@ -5,14 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <link rel="stylesheet" href="app/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="app/assets/css/custom.css">
 
     <script src="app/assets/js/jquery.min.js"></script>
     <script src="app/assets/js/bootstrap.min.js"></script>
 
-<!--    <script src="js/main.js"></script>-->
+    <!-- bootbox for confirm pop up -->
+    <script src="app/assets/js/bootbox.min.js"></script>
+
+    <!-- app js script -->
+    <script src="app/app.js"></script>
+
+    <!-- products scripts -->
+    <script src="app/product/read-products.js"></script>
+    <script src="app/product/create-product.js"></script>
+    <script src="app/product/read-one-product.js"></script>
+    <script src="app/product/update-product.js"></script>
+    <script src="app/product/delete-product.js"></script>
 
     <!-- set the page title, for seo purposes too -->
     <title><?php echo isset($page_title) ? strip_tags($page_title) : "Roman Hacking Project"; ?></title>
@@ -25,7 +35,7 @@
 
     // include login checker
     $require_login=true;
-    include_once "./login_checker.php";
+    include_once "./app/login_checker.php";
     ?>
 </head>
 <body>
@@ -69,18 +79,7 @@ echo "</div>"; ?>
 include 'layout_foot.php';
 ?>
 
-<!-- bootbox for confirm pop up -->
-<script src="app/assets/js/bootbox.min.js"></script>
 
-<!-- app js script -->
-<script src="app/app.js"></script>
-
-<!-- products scripts -->
-<script src="app/product/read-products.js"></script>
-<script src="app/product/create-product.js"></script>
-<script src="app/product/read-one-product.js"></script>
-<script src="app/product/update-product.js"></script>
-<script src="app/product/delete-product.js"></script>
 
 </body>
 </html>

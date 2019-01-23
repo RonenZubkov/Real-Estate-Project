@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <title>Register Page</title>
 
-    <script src="app/assets/js/jquery.min.js"></script>
-    <script src="app/assets/js/bootstrap.min.js"></script>
-    <link href="app/assets/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!--    <link href="../register/css/main.css" rel="stylesheet">-->
     <!------ Include the above in your HEAD tag ---------->
 
-    <script src="register/js/register.js"></script>
-    <script src="js/main.js"></script>
-    <link href="register/css/main.css" rel="stylesheet">
 
     <?php
     // core configuration
-    include_once "./api/config/core.php";
+    include_once "../api/config/core.php";
 
     // set page title
     $page_title = "Register";
@@ -24,12 +22,12 @@
     include_once "login_checker.php";
 
     // include classes
-    include_once './api/config/Database.php';
+    include_once '../api/config/Database.php';
     include_once 'objects/User.php';
     include_once "libs/php/utils.php";
 
     // include page header HTML
-    include_once "layout_head.php";
+    include_once "../layout_head.php";
 
     echo "<div class='col-md-12'>";
 
@@ -131,7 +129,7 @@
     echo "</div>";
 
     // include page footer HTML
-    include_once "layout_foot.php";
+    include_once "../layout_foot.php";
     ?>
 
 </head>
