@@ -55,16 +55,18 @@ $user = new User($db);
 if($_POST){
     // get id of product to be edited
     $data = json_decode(file_get_contents("php://input"));
-    print $data;
+    print_r($data);
 // set ID property of product to be edited
-    $user->id = $_SESSION['user_id'];
+//    $user->id = $_SESSION['user_id'];
+
+/*TODO build a class for password for MD5 / hashing  / Salting and so on*/
 
 // set user property values
-    $user->firstname=$data->firs_name;
-    $user->lastname=$data->lastname;
-    $user->contact_number=$data->contact_number;
-    $user->address=$data->address;
-    $user->password=$data->password;
+    $user->firstname=$_POST['firstname'];
+    $user->lastname=$_POST['lastname'];
+    $user->contact_number=$_POST['contact_number'];
+    $user->address=$_POST['address'];
+    $user->password=$_POST['password'];
 
 // get id of product to be edited
     /* Consult if to get it from Session or anything else $_SESSION['id']*/
@@ -92,6 +94,14 @@ if($_POST){
 
         // tell the user
         echo json_encode(array("message" => "Unable to update product."));
+    }
+
+    function debug_to_console( $data ) {
+        $output = $data;
+        if ( is_array( $output ) )
+            $output = implode( ',', $output);
+
+        echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
     }
 
 }

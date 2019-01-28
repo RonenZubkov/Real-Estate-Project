@@ -13,7 +13,7 @@
 
     <?php
     // core configuration
-    include_once "../api/config/core.php";
+    include_once "./config/core.php";
 
     // set page title
     $page_title = "Register";
@@ -22,8 +22,8 @@
     include_once "login_checker.php";
 
     // include classes
-    include_once '../api/config/Database.php';
-    include_once 'objects/User.php';
+    include_once './config/Database.php';
+    include_once 'model/objects/User.php';
     include_once "libs/php/utils.php";
 
     // include page header HTML

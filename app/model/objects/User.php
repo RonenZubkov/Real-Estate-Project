@@ -27,13 +27,11 @@ class User{
     }
 
     //Checking if email exists method
+    // check if given email exist in the database
     function emailExists(){
 
         // query to check if email exists
-        /* In PHP when we are using variables like: $This-table_Name, Table_name is set  ahead and because
-        we are using $ on "This" we dont need to write $table_name*/
-
-        $query = "SELECT id, first_name, last_name, access_level, password, status
+        $query = "SELECT id, first_name, last_name, password
             FROM " . $this->table_name . "
             WHERE email = ?
             LIMIT 0,1";
@@ -61,11 +59,9 @@ class User{
 
             // assign values to object properties
             $this->id = $row['id'];
-            $this->firstname = $row['first_name'];
-            $this->lastname = $row['last_name'];
-            $this->access_level = $row['access_level'];
+            $this->firstname = $row['firstname'];
+            $this->lastname = $row['lastname'];
             $this->password = $row['password'];
-            $this->status = $row['status'];
 
             // return true because email exists in the database
             return true;
@@ -75,6 +71,7 @@ class User{
         return false;
     }
 
+// update() method will be here
     // create new user record
     function create(){
 
@@ -133,38 +130,43 @@ class User{
 
     }
 //     id = :id"
-    function Update(){
-        // update query
-        $query = "UPDATE
-                " . $this->table_name . "
+    // update a user record
+    public function update(){
+
+        // if password needs to be updated
+        $password_set=!empty($this->password) ? ", password = :password" : "";
+
+        // if no posted password, do not update the password
+        $query = "UPDATE " . $this->table_name . "
             SET
-                first_name = :firstname,
-                last_name = :lastname,
-                email = :email,
-                contact_number = :contact_number,
-                address = :address,
-                password = :password 
-            WHERE
-                id = $this->id";
-      
-        // prepare query statement
+                firstname = :firstname,
+                lastname = :lastname,
+                email = :email
+                {$password_set}
+            WHERE id = :id";
+
+        // prepare the query
         $stmt = $this->conn->prepare($query);
 
         // sanitize
         $this->firstname=htmlspecialchars(strip_tags($this->firstname));
         $this->lastname=htmlspecialchars(strip_tags($this->lastname));
         $this->email=htmlspecialchars(strip_tags($this->email));
-        $this->contact_number=htmlspecialchars(strip_tags($this->contact_number));
-        $this->address=htmlspecialchars(strip_tags($this->address));
-        $this->password=htmlspecialchars(strip_tags($this->password));
 
-        // bind new values
-        $stmt->bindParam(':first_name', $this->firstname);
-        $stmt->bindParam(':last_name', $this->lastname);
+        // bind the values from the form
+        $stmt->bindParam(':firstname', $this->firstname);
+        $stmt->bindParam(':lastname', $this->lastname);
         $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':contact_number', $this->contact_number);
-        $stmt->bindParam(':address', $this->address);
-        $stmt->bindParam(':password', $this->password);
+
+        // hash the password before saving to database
+        if(!empty($this->password)){
+            $this->password=htmlspecialchars(strip_tags($this->password));
+            $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+            $stmt->bindParam(':password', $password_hash);
+        }
+
+        // unique ID of record to be edited
+        $stmt->bindParam(':id', $this->id);
 
         // execute the query
         if($stmt->execute()){
@@ -246,6 +248,16 @@ class User{
 //
 //        return $stmt;
 //    }
+
+    function findUserByEmail($email) {
+
+            $query = "SELECT * FROM users WHERE email = :email";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+    }
 
 
     public function showError($stmt){

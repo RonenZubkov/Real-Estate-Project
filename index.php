@@ -15,20 +15,20 @@
     <script src="app/assets/js/bootbox.min.js"></script>
 
     <!-- app js script -->
-    <script src="app/app.js"></script>
+    <script src="app/view/index.js"></script>
 
     <!-- products scripts -->
-    <script src="app/product/read-products.js"></script>
-    <script src="app/product/create-product.js"></script>
-    <script src="app/product/read-one-product.js"></script>
-    <script src="app/product/update-product.js"></script>
-    <script src="app/product/delete-product.js"></script>
+    <script src="app/view/product/read-products.js"></script>
+    <script src="app/view/product/create-product.js"></script>
+    <script src="app/view/product/read-one-product.js"></script>
+    <script src="app/view/product/update-product.js"></script>
+    <script src="app/view/product/delete-product.js"></script>
 
     <!-- set the page title, for seo purposes too -->
     <title><?php echo isset($page_title) ? strip_tags($page_title) : "Roman Hacking Project"; ?></title>
     <?php
     // core configuration
-    include_once "./api/config/core.php";
+    include_once "./app/config/core.php";
 
     // set page title
     $page_title="Index";
@@ -65,14 +65,26 @@ else if($action=='already_logged_in'){
 
 // content once logged in
 echo "<div class='alert alert-info'>";
-//  our app will be injected here
-//    echo "<div id='app'></div>";
+echo "<main role='main' class='container starter-template'>";
+
+    echo "<div class='row'>";
+        echo "<div class='col'>";
+
+//            <!-- where prompt / messages will appear -->
+            echo "<div id='response'></div>";
+
+//            <!-- where main content will appear -->
+            echo "<div id='content'></div>";
+       echo "</div>";
+    echo "</div>";
+
+echo "</main>";
 echo "</div>";
 
 
 echo "</div>"; ?>
 
-<div id='app'></div>
+<!--<div id='app'></div>-->
 
 <?php
 // footer HTML and JavaScript codes

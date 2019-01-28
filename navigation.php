@@ -35,8 +35,8 @@
                             &nbsp;&nbsp;<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo $home_url; ?>/app/edit_profile.php">Edit Profile</li>
-                            <li><a href="<?php echo $home_url; ?>logout.php">Logout</a></li>
+                            <li><a id ="update_account">Edit Profile</li>
+                            <li><a id="logout">Logout</li>
                         </ul>
                     </li>
                 </ul>
@@ -45,13 +45,13 @@
                 ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li <?php echo $page_title == "Login" ? "class='active'" : ""; ?>>
-                        <a href="<?php echo $home_url; ?>login">
+                        <a href="<?php echo $home_url; ?>app/login">
                             <span class="glyphicon glyphicon-log-in"></span> Log In
                         </a>
                     </li>
 
                     <li <?php echo $page_title == "Register" ? "class='active'" : ""; ?>>
-                        <a href="<?php echo $home_url; ?>register">
+                        <a href="<?php echo $home_url; ?>app/register">
                             <span class="glyphicon glyphicon-check"></span> Register
                         </a>
                     </li>

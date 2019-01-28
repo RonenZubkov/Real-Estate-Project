@@ -1,6 +1,23 @@
 <?php
+
+// required headers
+header("Access-Control-Allow-Origin: http://localhost/rest-api-authentication-example/");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
 // core configuration
-include_once "./api/config/core.php";
+include_once "./config/core.php";
+
+// generate json web token
+include_once 'config/core.php';
+include_once 'libs/php-jwt-master/src/BeforeValidException.php';
+include_once 'libs/php-jwt-master/src/ExpiredException.php';
+include_once 'libs/php-jwt-master/src/SignatureInvalidException.php';
+include_once 'libs/php-jwt-master/src/JWT.php';
+use \Firebase\JWT\JWT;
+
 
 // set page title
 $page_title = "Login";
@@ -12,14 +29,13 @@ include_once "login_checker.php";
 // default to false
 $access_denied=false;
 
-include_once "./libs/php/utils.php";
-
 
 /* TODO to check $_Post vs Server request method === post, which one will be better*/
 if($_POST){
+
     // include classes
-    include_once "./api/config/Database.php";
-    include_once "objects/User.php";
+    include_once "./config/Database.php";
+    include_once "./model/objects/User.php";
 
 // get database connection
     $database = new Database();
@@ -67,7 +83,7 @@ if($_POST){
 }
 
 // include page header HTML
-include_once "layout_head.php";
+include_once "../layout_head.php";
 
 echo "<div class='col-sm-6 col-md-4 col-md-offset-4'>";
 
@@ -112,4 +128,4 @@ echo "</div>";
 echo "</div>";
 
 // footer HTML and JavaScript codes
-include_once "layout_foot.php";
+include_once "../layout_foot.php";
