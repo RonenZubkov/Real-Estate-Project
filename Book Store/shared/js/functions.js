@@ -5,19 +5,19 @@ $( document ).ready(function() {
 // function to make form values to json format
 $.fn.serializeObject = function()
 {
-    var o = {};
-    var a = this.serializeArray();
-    $.each(a, function() {
-        if (o[this.name] !== undefined) {
-            if (!o[this.name].push) {
-                o[this.name] = [o[this.name]];
+    let object = {};
+    let array = this.serializeArray();
+    $.each(array, function() {
+        if (object[this.name] !== undefined) {
+            if (!object[this.name].push) {
+                object[this.name] = [object[this.name]];
             }
-            o[this.name].push(this.value || '');
+            object[this.name].push(this.value || '');
         } else {
-            o[this.name] = this.value || '';
+            object[this.name] = this.value || '';
         }
     });
-    return o;
+    return object;
 };
 
 function checkIfJWT(){

@@ -59,8 +59,8 @@ class User{
 
             // assign values to object properties
             $this->id = $row['id'];
-            $this->firstname = $row['firstname'];
-            $this->lastname = $row['lastname'];
+            $this->firstname = $row['first_name'];
+            $this->lastname = $row['last_name'];
             $this->password = $row['password'];
 
             // return true because email exists in the database
@@ -77,20 +77,21 @@ class User{
 
         // to get time stamp for 'created' field
         $this->created=date('Y-m-d H:i:s');
+        $this->status='';
 
         // insert query
         $query = "INSERT INTO
                 " . $this->table_name . "
             SET
-                first_name = :first_name,
-                last_name = :last_name,
+                firstname = :first_name,
+                lastname = :last_name,
                 email = :email,
                 contact_number = :contact_number,
                 address = :address,
                 password = :password,
                 access_level = :access_level,
                 status = :status,
-                created = :created";
+//              created = :created";
 
         // prepare the query
         $stmt = $this->conn->prepare($query);

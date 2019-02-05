@@ -38,12 +38,11 @@ $(document).submit('#login_form', function(){
     return false;
 });
 /*Works*/
-$(document).submit('#sign_up_form', function(){
-    console.log('Submited');
+$(document).on('submit','#sign_up_form', function(){
     // get form data
     let sign_up_form=$(this);
     let form_data=JSON.stringify(sign_up_form.serializeObject());
-
+    console.log('This serialize: ', $( this ).serialize() );
     console.log(form_data);
     console.log(sign_up_form);
 

@@ -91,95 +91,6 @@ class Product{
 	    return $result_message;
 	}
 
-	// count records in date ranges
-	public function countSearchByDateRange($date_from, $date_to){
-
-		// query to count records in date ranges
-		$query = "SELECT COUNT(*) as total_rows
-					FROM books
-					WHERE
-						created BETWEEN :date_from AND :date_to
-						OR created LIKE :date_from_for_query
-						OR created LIKE :date_to_for_query";
-
-		// prepare query
-		$stmt = $this->conn->prepare($query);
-
-		// bind date variables
-		$stmt->bindParam(":date_from", $date_from);
-		$stmt->bindParam(":date_to", $date_to);
-
-		/*http://php.net/manual/fa/function.date-diff.php*/
-		$date_from_for_query = "%{$date_from}%";
-		$date_to_for_query = "%{$date_to}%";
-		$stmt->bindParam(":date_from_for_query", $date_from_for_query);
-		$stmt->bindParam(":date_to_for_query", $date_to_for_query);
-
-		// execute query and get total rows
-		$stmt->execute();
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		return $row['total_rows'];
-	}
-
-	public function searchByDateRange($date_from, $date_to, $from_record_num, $records_per_page){
-
-		//select all data
-		$query = "SELECT book.id, book.name, book.description, book.price, category.name as category_name, book.created
-					FROM " . $this->table_name . " book
-						LEFT JOIN categories categories
-							ON book.category_id = category.id
-					WHERE
-						book.created BETWEEN :date_from AND :date_to
-						OR book.created LIKE :date_from_for_query
-						OR book.created LIKE :date_to_for_query
-					ORDER BY created DESC
-					LIMIT :from_record_num, :records_per_page";
-
-		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(":date_from", $date_from);
-		$stmt->bindParam(":date_to", $date_to);
-
-		$date_from_for_query = "%{$date_from}%";
-		$date_to_for_query = "%{$date_to}%";
-		$stmt->bindParam(":date_from_for_query", $date_from_for_query);
-		$stmt->bindParam(":date_to_for_query", $date_to_for_query);
-
-		$stmt->bindParam(":from_record_num", $from_record_num, PDO::PARAM_INT);
-		$stmt->bindParam(":records_per_page", $records_per_page, PDO::PARAM_INT);
-		$stmt->execute();
-
-		return $stmt;
-	}
-
-	// used to export records to csv
-//	public function export_CSV(){
-//
-//		//select all data
-//		$query = "SELECT id, name, description, price, created, modified FROM books";
-//		$stmt = $this->conn->prepare($query);
-//		$stmt->execute();
-//
-//		//this is how to get number of rows returned
-//		$num = $stmt->rowCount();
-//
-//		$out = "ID,Name,Description,Price,Created,Modified\n";
-//
-//		if($num>0){
-//			//retrieve our table contents
-//			//fetch() is faster than fetchAll()
-//			//http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
-//			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-//				//extract row
-//				//this will make $row['name'] to
-//				//just $name only
-//				extract($row);
-//				$out.="{$id},\"{$name}\",\"{$description}\",{$price},{$created},{$modified}\n";
-//			}
-//		}
-//
-//		return $out;
-//	}
 
 	// read products by search term
 	public function search($search_term, $from_record_num, $records_per_page){
@@ -216,31 +127,6 @@ class Product{
 		return $stmt;
 	}
 
-	public function countAll_BySearch($search_term){
-
-		// select query
-		$query = "SELECT
-					COUNT(*) as total_rows
-				FROM
-					" . $this->table_name . " p
-					LEFT JOIN
-						categories c
-							ON p.category_id = c.id
-				WHERE
-					p.name LIKE ?";
-
-		// prepare query statement
-		$stmt = $this->conn->prepare( $query );
-
-		// bind variable values
-		$search_term = "%{$search_term}%";
-		$stmt->bindParam(1, $search_term);
-
-		$stmt->execute();
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		return $row['total_rows'];
-	}
 
 	// create product
 	public function create(){
@@ -326,66 +212,6 @@ class Product{
 		return $stmt;
 	}
 
-	// read products
-	public function readAll_ByCategory($from_record_num, $records_per_page){
-
-		// select query
-		$query = "SELECT
-					c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
-				FROM
-					" . $this->table_name . " p
-					LEFT JOIN
-						categories c
-							ON p.category_id = c.id
-				WHERE
-					p.category_id=?
-				ORDER BY
-					p.name ASC
-				LIMIT
-					?, ?";
-
-		// prepare query statement
-		$stmt = $this->conn->prepare( $query );
-
-		// bind variable values
-		$stmt->bindParam(1, $this->category_id);
-		$stmt->bindParam(2, $from_record_num, PDO::PARAM_INT);
-		$stmt->bindParam(3, $records_per_page, PDO::PARAM_INT);
-
-		// execute query
-		$stmt->execute();
-
-		// return values from database
-		return $stmt;
-	}
-
-	// read products
-	public function countAll_ByCategory(){
-
-		// select query
-		$query = "SELECT
-					COUNT(*) as total_rows
-				FROM
-					" . $this->table_name . " p
-					LEFT JOIN
-						categories c
-							ON p.category_id = c.id
-				WHERE
-					p.category_id=?";
-
-		$stmt = $this->conn->prepare( $query );
-		$stmt->bindParam(1, $this->category_id);
-
-		$stmt->execute();
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		return $row['total_rows'];
-	}
-
-	// used for paging product list with field sorting
-	public function countAll_WithSorting($field, $order){
-		// for now countAll() is used
-	}
 
 	// used for paging products
 	public function countAll(){
@@ -470,27 +296,9 @@ class Product{
 		}
 	}
 
-	// delete selected products
-	public function deleteSelected($ids){
-
-		$in_ids = str_repeat('?,', count($ids) - 1) . '?';
-
-		// query to delete multiple records
-		$query = "DELETE FROM " . $this->table_name . " WHERE id IN ({$in_ids})";
-
-		$stmt = $this->conn->prepare($query);
-
-		if($stmt->execute($ids)){
-			return true;
-		}else{
-			return false;
-		}
-	}
-
 	// used for the 'created' field when creating a product
 	public function getTimestamp(){
 		date_default_timezone_set('Asia/Jerusalem');
 		$this->timestamp = date('Y-m-d H:i:s');
 	}
 }
-?>
